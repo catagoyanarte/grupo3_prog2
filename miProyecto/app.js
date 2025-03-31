@@ -9,7 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 var app = express();
 
-// view engine setup
+// view engine setup..
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
