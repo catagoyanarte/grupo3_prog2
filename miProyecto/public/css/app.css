@@ -4,7 +4,7 @@
 
 /*====== Variables ======*/
 :root {
-  --yellow: #EAC926;
+  --yellow: #e7d5e6;
   --dark-blue: #03264C;
   --light-blue: #1259c3;
   --gray: #666666;
@@ -52,6 +52,9 @@ figure {
 
 img {
   width: 100%;
+}
+.img1{
+  height: 400px;
 }
 
 input,
@@ -154,7 +157,7 @@ hr {
 
 /*====== Banner ======*/
 .banner {
-  background-image: url(/images/img-home-banner.jpg);
+  background-image: url(/images/banner.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
