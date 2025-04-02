@@ -1,6 +1,5 @@
-const products = require('../data/products');
-const comments = require('../data/comments');
-const users = require('../data/users');
+const comments = require('../db/comments');
+const users = require('../db/users');
 
 module.exports = {
   addProductForm: function(req, res) {

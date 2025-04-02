@@ -1,4 +1,4 @@
-const users = require('../data/users');
+const users = require('../db/users');
 
 module.exports = {
   registerForm: function(req, res) {
