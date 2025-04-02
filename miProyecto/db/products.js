@@ -1,4 +1,5 @@
-const productos = [
+const productos = {
+    producto: [      
     {
         id: 1,
         imagen: "/images/products/libro1.jpg", 
@@ -59,4 +60,7 @@ const productos = [
         nombre: "The Bird",
         descripcion: "Libertad, vuelo, naturaleza, canto, belleza, símbolo, soledad, instinto, paz, observación."
     }
-];module.exports = productos;
+        ] 
+            };
+
+module.exports = productos;
