@@ -8,4 +8,6 @@ const users = {
         fotoPerfil: '/images/users/oriana.jpg'
     }
 };
+
+
 module.exports = users;

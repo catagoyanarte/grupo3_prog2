@@ -8,7 +8,7 @@ module.exports = {
     res.render('login');
   },
   profile: function(req, res) {
-    const user = users[0];
+    const user = users[0]; 
     res.render('profile', { user });
   }
 };
