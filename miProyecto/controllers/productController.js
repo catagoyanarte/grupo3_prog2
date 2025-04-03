@@ -1,4 +1,4 @@
-const comments = require('../db/comments');
+const products = require('../db/products');
 const users = require('../db/users');
 
 module.exports = {

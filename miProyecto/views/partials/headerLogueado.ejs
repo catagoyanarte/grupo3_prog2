@@ -13,7 +13,7 @@
         <div class="row align-items-center">
             <div class="col-5 col-md-2">
                 <a href="index.ejs" class="main-header_home-link">
-                    <img src="./images/logo.jpg">
+                    <img src="/images/logo.jpg">
                 </a>
             </div>
 
@@ -39,13 +39,13 @@
 
         <nav class="main-navbar">
             <ul class="left-navbar">
-                <li><a href="index.ejs">Todos los productos</a></li>
+                <li><a href="/">Todos los productos</a></li>
                 <li><a href="product-add.html">Cargar productos</a></li>
             </ul>
 
             <ul class="right-navbar">
-                <li><a href="perfil.ejs">
-                        Nombre del usuario <i class="fas fa-user"></i>
+                <li><a href="/user/profile">
+                        <h1><%= user.usuario %></h1>
                     </a>
                 </li>
                 <li>
