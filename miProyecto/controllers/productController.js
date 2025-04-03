@@ -1,13 +1,10 @@
 const products = require('../db/products');
-const users = require('../db/users');
 
-module.exports = {
-  addProductForm: function(req, res) {
-    const user = users[0];
-    res.render('addProduct', { user });
-  },
-  productDetail: function(req, res) {
-    const product = products[0];
-    res.render('productDetail', { product, comments });
+const productoController = {
+  detalle: function (req,res) {
+    let producto = products.producto;
+    res.render('product', {productos: producto})
   }
 };
+
+module.exports = productoController;

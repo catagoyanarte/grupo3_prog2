@@ -13,6 +13,6 @@ const userController = {
     let productos = products.producto;
     res.render('perfil', { user: nombreUsuario, productos: productos});
   }
-}
+};
 
 module.exports = userController;

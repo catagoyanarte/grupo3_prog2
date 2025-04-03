@@ -1,11 +1,10 @@
-const users = require('../db/users');
+const listaProductos = require('../db/products');
 
-module.exports = {
-  home: function(req, res) {
-    const usuario = users.usuario;
-    res.render('index', { usuario });
-  },
-  searchResults: function(req, res) {
-    res.render('searchResults');
+const mainController = {
+  index: function (req, res) {
+      let productos= listaProductos.producto;
+      res.render("index", {productos: productos })
   }
 };
+
+module.exports = mainController;
