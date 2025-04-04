@@ -3,7 +3,7 @@ const users = {
         email: "orianasabatini@gmai.com",
         usuario: "ori_sabatini",
         contrasenia: "dybala",
-        fechaNacimiento: "14-01-1999",
+        fechaNacimiento: "14-01-2024",
         numeroDocumento: "47090878",
         fotoPerfil: '/images/users/oriana.jpg'
     }
