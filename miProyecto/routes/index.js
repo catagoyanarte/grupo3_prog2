@@ -12,7 +12,7 @@ const contactControllers = require('../controllers/contactControllers');
 
 router.get('/', mainController.index);
 router.get('/search', busquedaController.busqueda);
-router.get('/products', productController.detalle);
+router.get('/products/:id', productController.detalle);
 router.get('/about', aboutController.index);
 router.get('/contact', contactControllers.index);
 
