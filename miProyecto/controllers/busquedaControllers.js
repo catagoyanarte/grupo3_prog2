@@ -4,12 +4,12 @@ const busquedaControllers =  {
     
     const resultados = [
 
-        { nombre: "Libro 1", descripcion: "Descripción del producto 1" },
-        { nombre: "Libro 2", descripcion: "Descripción del producto 2" },
-        { nombre: "Libro 3", descripcion: "Descripción del producto 3" }
+        { nombreLibro: "Libro 1", description: "Descripción del producto 1" },
+        { nombreLibro: "Libro 2", description: "Descripción del producto 2" },
+        { nombreLibro: "Libro 3", description: "Descripción del producto 3" }
     ];
 
-    res.render('busquedaControllers', { resultados, requerimiento});
+    res.render('resultados', { resultados, requerimiento});
   }
 };
 
