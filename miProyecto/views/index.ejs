@@ -50,7 +50,7 @@
                   <p><%= productos[i].descripcion %></p>
                   <% for (let j = 0; j < productos[i].comentarios.length; j++) { %>
                     <div class="comentario">
-                      <img src="<%= productos[i].comentarios[j].fotoPerfil %>" alt="Foto de <%= productos[i].comentarios[j].usuario %>" class="comentario-img">
+                      <img src="<%= productos[i].comentarios[j].fotoPerfil %>" alt="Foto de <%= productos[i].comentarios[j].usuario %>" class="comentario-img" class="fotoRadio">
                       <strong><%= productos[i].comentarios[j].usuario %></strong>
                       <p><%= productos[i].comentarios[j].comentario %></p>
                     </div>

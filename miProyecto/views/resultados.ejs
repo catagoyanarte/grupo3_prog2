@@ -23,18 +23,19 @@
                 <div class="col-12">
                     <h2 class="products-title">Resultados de búsqueda</h2>
                 </div>
-                <!-- Show the "ultimos" products -->
-                <h2 class="col-12"> 
-                    <% for( let i = 0; i < resultados.length; i++ ) { %>
+                
+                <% for (let i = 0; i < resultados.length; i++) { %>
+                    <div class="col-12 mb-3">
                         <ul>
-                            <li><%= resultados[i].nombreLibro %></li>
-                            <li><%= resultados[i].description %></li>
+                            <li><strong>Nombre:</strong> <%= resultados[i].nombreLibro %></li>
+                            <li><strong>Descripción:</strong> <%= resultados[i].description %></li>
                         </ul>
-                    <% } %>
-                </h2>
-
-
+                    </div>
+                <% } %>
+        
                 <%- include('partials/footer') %>
+            </div>
+        </div>
 </body>
 
 </html>
