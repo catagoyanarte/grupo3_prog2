@@ -129,7 +129,36 @@ const productos = {
                 fotoPerfil: "/images/comentarios/KLamar.jpg"
             },
         ]
-    }
+        
+    },
+    {
+        id: 11,
+        imagen: "/images/products/libro11.jpg", 
+        nombre: "The Yellow Van",
+        descripcion: "Libertad, belleza, símbolo, soledad, instinto, paz.",
+        comentarios: [
+            {
+                usuario: "SGomez", 
+                comentario: "¡Excelente libro me encanto!",
+                fotoPerfil: "/images/comentarios/SGomez.jpg"
+            },
+        ]
+        
+    },
+    {
+        id: 12,
+        imagen: "/images/products/libro12.jpg", 
+        nombre: "The Yellow Wall Paper",
+        descripcion: "Lectura, belleza, símbolo, soledad, instinto, paz, observación.",
+        comentarios: [
+            {
+                usuario: "DLipa", 
+                comentario:"Muy feliz con la compra",
+                fotoPerfil: "/images/comentarios/DLipa.jpg"
+            },
+        ]
+    },
+
         ] 
             };
 
