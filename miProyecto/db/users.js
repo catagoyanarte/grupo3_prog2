@@ -1,10 +1,10 @@
 const users = {
     usuario: {
-        email: "orianasabatini@gmai.com",
+        email: "orianasabatini@gmail.com",
         usuario: "ori_sabatini",
         contrasenia: "dybala",
-        fechaNacimiento: "14-01-2024",
-        numeroDocumento: "47090878",
+        fechaNacimiento: "08-11-2000",
+        numeroDocumento: 43820583,
         fotoPerfil: '/images/users/oriana.jpg'
     }
 };
