@@ -574,12 +574,21 @@ textarea.form-input {
 
   
 }
-
+.login-container {
+  background-color:#124355;
+  padding: 40px 20px;
+  border-radius: 10px;
+  width: 600px;
+  max-width: 600px;
+  height:46vh;
+}
 .labell {
   font-size: 13px;
   color: white;
   font-family:  Noto Sans;
 }
+
+
 
 .body_register {
   margin: 0;
