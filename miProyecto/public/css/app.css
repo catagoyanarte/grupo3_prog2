@@ -10,7 +10,7 @@
   --gray: #666666;
   --light-gray: rgb(222 212 197);
   --green: #39b54a;
-  --base-font-family: 'Roboto', sans-serif
+  --base-font-family:  Noto Sans
 }
 
 
@@ -187,9 +187,9 @@ hr {
 }
 
 .products-title {
-  font-size: 2.4em;
+  font-size: 30px;
   font-weight: 400;
-  color: var(--gray);
+  color: #124355;
   font-family:Kanit ;
 }
 
@@ -301,23 +301,27 @@ hr {
 
 .footer-data h2 {
   color: white;
-  font-size: 2.4em;
+  font-size: q0px;
   font-weight: 400;
+  font-family:  Noto Sans;
 }
 
 .footer-data p {
   color: var(--gray);
-  font-size: 1.5em;
+  font-size: 9px;
   font-weight: 300;
+  font-family:  Noto Sans;
 }
 
 .sub-footer {
   border-top: 1px solid var(--light-gray);
   background-color: #ffffff;
+  font-family:  Noto Sans;
 }
 
 .sub-footer p {
   margin: 0;
+  font-family:  Noto Sans;
   color: var(--gray);
   padding: 15px 0;
 }
@@ -520,7 +524,8 @@ textarea.form-input {
 }
 
 .product-box_data h2 {
-  font-size: 1.2em;
+  font-size: 20px;
+  text-align: center;
   margin: 10px 0 5px;
   color: white;
 }
@@ -538,19 +543,66 @@ textarea.form-input {
 
 .comentario-img,
 .fotoRadio {
-  width: 32px;
-  height: 32px;
+  width: 120px;
+  height: 100%;
   border-radius: 50%;
   margin-right: 10px;
 }
 
 .comentario strong {
-  color: #222;
+  color: var(--gray);;
+  font-size: 15px;
 }
 
 .comentario p {
   margin: 2px 0 0;
   color: #444;
+}
+
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.register-container {
+  background-color:#124355;
+  padding: 40px 20px;
+  border-radius: 10px;
+  width: 600px;
+  max-width: 600px;
+  height: 76vh;
+
+  
+}
+
+.labell {
+  font-size: 13px;
+  color: white;
+  font-family:  Noto Sans;
+}
+
+.body_register {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  padding: 20px;
+}
+
+.inputt {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+.boton {
+  padding: 10px 20px;
+  background-color: #124355;
+  color: white ;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
 }
 
 
