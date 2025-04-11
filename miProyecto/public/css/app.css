@@ -191,6 +191,7 @@ hr {
   font-weight: 400;
   color: #124355;
   font-family:Kanit ;
+  text-align: center;
 }
 
 .product-box {
@@ -237,7 +238,7 @@ hr {
 .product-box_data p {
   font-size: 1.5em;
   width: 100%;
-  color: var(--gray);
+  color: white;
   margin: 0;
   height: 0;
   transition: 300ms;
@@ -307,8 +308,8 @@ hr {
 }
 
 .footer-data p {
-  color: var(--gray);
-  font-size: 9px;
+  color: wheat;
+  font-size: 15px;
   font-weight: 300;
   font-family:  Noto Sans;
 }
@@ -510,7 +511,7 @@ textarea.form-input {
   background-color: #124355;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 15px;
+  padding: 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -536,8 +537,7 @@ textarea.form-input {
 }
 
 .comentario {
-  display: flex;
-  align-items: flex-start;
+  
   margin-bottom: 10px;
 }
 
@@ -547,16 +547,18 @@ textarea.form-input {
   height: 100%;
   border-radius: 50%;
   margin-right: 10px;
+  margin-top: 20px;
 }
 
 .comentario strong {
-  color: var(--gray);;
+  color: white;
   font-size: 15px;
 }
 
 .comentario p {
   margin: 2px 0 0;
-  color: #444;
+  font-size: 12px;
+  color: white;
 }
 
 
@@ -591,7 +593,8 @@ textarea.form-input {
 
 
 .body_register {
-  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -60,7 +60,7 @@ const productos = {
         comentarios: [
             {
                 usuario: "AdamPort", 
-                comentario: "Gran selección de títulos para adolescentes.",
+                comentario: "Gran selección de título.",
                 fotoPerfil: "/images/comentarios/APort.jpg"
             },
         ]
@@ -86,7 +86,7 @@ const productos = {
         comentarios: [
             {
                 usuario: "Rampa", 
-                comentario: "Perfecto para mantener el interés de los lectores jóvenes.",
+                comentario: "Perfecto para mantener el interés.",
                 fotoPerfil: "/images/comentarios/Rampa.jpg"
             },
         ]
@@ -99,7 +99,7 @@ const productos = {
         comentarios: [
             {
                 usuario: "ADiaz", 
-                comentario: "Sin duda, volveré a comprar aquí.",
+                comentario: "Volveré a comprar aquí.",
                 fotoPerfil: "/images/comentarios/ADiaz.jpg"
             },
         ]
@@ -112,7 +112,7 @@ const productos = {
         comentarios: [
             {
                 usuario: "Miloj", 
-                comentario: "Un libro que no solo entretiene sino que también educa. Ideal para adolescentes.",
+                comentario: "Un libro que también educa!.",
                 fotoPerfil: "/images/comentarios/MiloJ.jpg"
             },
         ]
