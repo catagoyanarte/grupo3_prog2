@@ -6,5 +6,4 @@ const productoController = {
     res.render('producto', {producto});
   }
 };
-
 module.exports = productoController;
