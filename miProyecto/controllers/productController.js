@@ -5,6 +5,5 @@ const productoController = {
     let producto = products.producto[0];
     res.render('producto', {producto});
   }
-};
-
+};p
 module.exports = productoController;
