@@ -1,6 +1,5 @@
 const busquedaControllers =  {
   busqueda: function(req, res) {
-    const requerimiento = req.query.search;
     
     const resultados = [
 
@@ -9,7 +8,7 @@ const busquedaControllers =  {
         { nombreLibro: "Libro 3", description: "Descripción del producto 3" }
     ];
 
-     res.render('resultados', { resultados, requerimiento})
+     res.render('resultados', { resultados})
   }
 };
 
