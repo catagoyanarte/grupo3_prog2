@@ -2,10 +2,6 @@ const users = require('../db/users');
 const products = require('../db/products');
 
 const userController = {
-  index: function (req, res) {
-      let productos= listaProductos.producto;
-      res.render("index", {productos})
-  },
   register: function(req, res) {
     res.render('register');
   },
