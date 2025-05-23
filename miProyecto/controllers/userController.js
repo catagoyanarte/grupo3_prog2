@@ -1,5 +1,6 @@
-const users = require('../db/users');
-const products = require('../db/products');
+//const users = require('../db/users');
+//const products = require('../db/products');
+const db = require('../database/models');
 
 const userController = {
   register: function(req, res) {
@@ -11,7 +12,7 @@ const userController = {
   profile: function(req, res) {
     let nombreUsuario = users.usuario; 
     let productos = products.producto;
-    res.render('perfil', { user: nombreUsuario, productos: productos});
+    res.render('perfil', {user: nombreUsuario, productos: productos});
   }
 };
 
