@@ -12,7 +12,7 @@ module.exports = function (sequelize, dataTypes) {
         usuario: {
             type: dataTypes.STRING
         },
-        conrasena: {
+        contrasena: {
             type: dataTypes.STRING
         },
         foto_perfil: {
@@ -37,8 +37,8 @@ module.exports = function (sequelize, dataTypes) {
 
     let config = {
         tableName: "usuarios",
-        timestamps: true,
-        underscored: true,
+        timestamps: false,
+        underscored: false,
     };
 
     const Usuario = sequelize.define(alias, columnas, config);
