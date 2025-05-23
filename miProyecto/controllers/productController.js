@@ -1,4 +1,4 @@
-const products = require('../db/products');
+//const products = require('../db/products');
 const db = require('../database/models');
 
 const productoController = {
@@ -7,4 +7,7 @@ const productoController = {
     res.render("producto", {producto});
   }
 };
+
+
 module.exports = productoController;
+
