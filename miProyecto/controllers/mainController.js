@@ -13,8 +13,11 @@ const mainController = {
   index: function(req, res) {
     let relacion = {
       include: [
-        {association: "usuarios"},
-        {association: "comentarios"},
+        {
+          association: "comentarios",
+          include: [ { association: "usuario" } ] 
+        },
+        { association: "usuarios" }
       ]
     }
     Producto.findAll(relacion)
