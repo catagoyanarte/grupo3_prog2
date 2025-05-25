@@ -30,13 +30,13 @@ let productoController = {
 
     db.Producto.findAll({
       where: {
-        name: {
+        nombre: {
           [op.like]: '%' + query + '%'
         }
       }
     })
       .then(function (librosEncontrados) {
-        return res.render("search-results", {
+        return res.render("resultados", {
           resultados: librosEncontrados,
           query: query
         });
