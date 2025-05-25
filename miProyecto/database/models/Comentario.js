@@ -42,7 +42,7 @@ module.exports = function (sequelize, dataTypes) {
         });
 
         Comentario.belongsTo(models.Producto, {
-            as: "productos",
+            as: "producto",
             foreignKey: "id_producto"
         });
     };

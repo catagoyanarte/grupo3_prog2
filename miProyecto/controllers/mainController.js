@@ -17,7 +17,7 @@ const mainController = {
           association: "comentarios",
           include: [ { association: "usuario" } ] 
         },
-        { association: "usuarios" }
+        { association: "usuario" }
       ]
     }
     Producto.findAll(relacion)

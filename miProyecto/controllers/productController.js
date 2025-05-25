@@ -1,17 +1,27 @@
 //const products = require('../db/products');
+let association = require('sequelize');
 const db = require('../database/models');
+const Producto = db.Producto;
 let op = db.Sequelize.Op;
 
 let productoController = {
-  show: function (req, res) {
-    
-    db.Producto.findByPk(req.params.id)
+  detalle: function (req, res) {
+    let id = req.params.id; // recuperamos el id
+    Producto.findByPk(id, {
+      include: [
+        {
+          association: "comentarios", include: [
+            { association: "usuario" }
+          ]
+        },
+        { association: "usuario" }
+      ]
+    })
       .then(function (producto) {
-
-        return res.render("producto", { producto: producto });
-
-      }).catch(function (err) {
-        return res.send(err)
+        return res.render("producto", { producto });
+      })
+      .catch(function (err) {
+        return console.log(err);
       })
   },
 
