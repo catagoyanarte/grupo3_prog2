@@ -64,9 +64,49 @@ const userController = {
 
       });
   },
-  login: function (req, res) {
-    res.render('login');
-  },
+  showLogin: function(req, res) {
+    if ( req.session.usuario != undefined ) {
+        return res.redirect("/");
+  } else {
+    return res.render("login");
+  }},
+  createLogin: function (req, res) {
+    // recupero los datos del form
+      let email = req.body.email;
+      let contrasena = req.body.contrasena;
+      let recordarme = req.body.recordarme;
+      let error = {};
+
+    let userInfo = {
+      email: email,
+      contrasena: contrasena,
+      recordarme: recordarme
+    }; 
+
+    // valido que email y contrasena sean correctas
+    //
+    if ( userInfo.email !== email) {
+      error.email = "Este mail no ha sido registrado.";
+    } else {
+        
+    }
+    if ( userInfo.contrasena !== contrasena) {
+      error.email = "La contrasena no corresponde al mail registrado.";
+    } else {
+      
+    }
+  
+   //poner al usuario en session
+    req.session.user = userInfo;
+   // recordarme - creo una cookie
+  if (userInfo.recordarme != undefined) {
+      res.cookie("user", userInfo, { maxAge: 150000});
+  }
+
+  //res.redirect("/")
+  
+  }
+  // req.session.destroy();   --> log out 
 };
 
 
