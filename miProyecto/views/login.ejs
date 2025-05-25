@@ -36,11 +36,14 @@
                                 <div class="form-group">
                                     <label class="labell" for="email">Email</label>
                                     <input class="inputt" type="email" id="email" name="usuario" placeholder="Ingresa tu correo" required>
+                                    <% if (error_login.email) { %><p class="error"><%= error_login.email %></p><% } %>
                                 </div>
         
                                 <div class="form-group">
                                     <label class="labell" for="password">Contraseña</label>
                                     <input class="inputt" type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+                                    <% if (error_login.contrasena) { %><p class="error"><%= error_login.contrasena %></p><% } %>
+
                                   </div>
                                     <input class="labell" type="checkbox" id="recordarme" name="remember"> Recordarme
                                 </label>

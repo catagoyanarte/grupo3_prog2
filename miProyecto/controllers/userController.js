@@ -10,7 +10,7 @@ const userController = {
     if (req.session.user != undefined) {
       return res.redirect('/profile' + req.session.user.id)
     } else {
-      return res.render("register", { error: {}, anterior: {} });
+      return res.render("register", { error: {} });
     }
 
   },
@@ -42,7 +42,7 @@ const userController = {
       .then(function (user) {
         if (user) {
           error.email = "Este email ya está registrado";
-          return res.render("register", { error, anterior: req.body });
+          return res.render("register", { error });
         }
 
 
@@ -64,52 +64,64 @@ const userController = {
 
       });
   },
-  showLogin: function(req, res) {
-    if ( req.session.usuario != undefined ) {
-        return res.redirect("/");
-  } else {
-    return res.render("login");
-  }},
+  showLogin: function (req, res) {
+    if (req.session.usuario != undefined) {
+      return res.redirect("/");
+    } else {
+      return res.render("login");
+    }
+  },
   createLogin: function (req, res) {
     // recupero los datos del form
-      let email = req.body.email;
-      let contrasena = req.body.contrasena;
-      let recordarme = req.body.recordarme;
-      let error = {};
+    let email = req.body.email;
+    let contrasena = req.body.contrasena;
+    let recordarme = req.body.recordarme;
+    let error_login = {};
 
     let userInfo = {
       email: email,
       contrasena: contrasena,
       recordarme: recordarme
-    }; 
+    }
 
     // valido que email y contrasena sean correctas
-    //
-    if ( userInfo.email !== email) {
-      error.email = "Este mail no ha sido registrado.";
-    } else {
-        
-    }
-    if ( userInfo.contrasena !== contrasena) {
-      error.email = "La contrasena no corresponde al mail registrado.";
-    } else {
-      
-    }
-  
-   //poner al usuario en session
-    req.session.user = userInfo;
-   // recordarme - creo una cookie
-  if (userInfo.recordarme != undefined) {
-      res.cookie("user", userInfo, { maxAge: 150000});
-  }
+    
+    db.Usuario.findOne({ where: { email: email } })
+    .then(function(user) {
+      if (user) {
+        error_login.email = "Este email no ha sido registrado";
+        return res.render("login", { error_login: {} })}
+    });
 
-  //res.redirect("/")
-  
+    let validacion = bcrypt.compareSync(req.body.contrasena, contrasena);
+        if (!validacion) {
+          req.session.user = contrasena;
+          error_login.contrasena = "Esta contrasena no es valida";
+        return res.render("login", { error_login: {} })}
+
+    //poner al usuario en session
+    req.session.user = userInfo;
+
+    // recordarme - creo una cookie
+    if (req.body.recordarme != undefined) {
+      res.cookie("user", userInfo, { maxAge: 150000 });
+    }
+
+    res.redirect("/perfil")
+
   }
   // req.session.destroy();   --> log out 
 };
 
 
+    // if (userInfo.email !== email) {
+    //   error.email = "Este mail no ha sido registrado.";
+    // } else {
+ 
+    // }
+    // if (userInfo.contrasena !== contrasena) {
+    //   error.email = "La contrasena no corresponde al mail registrado.";
+    // } else {
 
 /*
 const userController = {
