@@ -8,7 +8,7 @@ const userController = {
   show: function (req, res) {
 
     if (req.session.user != undefined) {
-      return res.redirect('/profile' + req.session.user.id)
+      return res.redirect('/register' + req.session.user.id)
     } else {
       return res.render("register", { error: {} });
     }
@@ -46,13 +46,12 @@ const userController = {
 
     db.Usuario.findOne({ where: { email: email } })
       .then(function (user) {
-        if (user) {
-          error.email = "Este email ya está registrado";
-          return res.render("register", { error });
-        }
 
+  if (user != undefined) {
 
-        let nuevoUsuario = {
+     return res.send("El email ya existe")
+  }else{ 
+     let nuevoUsuario = {
           usuario: usuario,
           email: email,
           contrasena: bcryptjs.hashSync(contrasena, 10),
@@ -67,6 +66,11 @@ const userController = {
           .catch(function (error) {
             return res.send(error);
           });
+   
+  }
+
+
+       
 
       });
   },
