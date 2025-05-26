@@ -27,6 +27,15 @@ let productoController = {
 
   search: function (req, res) {
     let query = req.query.search;
+    error = {}
+
+    if (query == "") {
+
+        error.librosEncocontrados = "Ingresa un libro encontrado";
+        return res.render("resultados", { error, resultados: [] });
+        
+      }
+    
 
     db.Producto.findAll({
       where: {
@@ -35,7 +44,9 @@ let productoController = {
         }
       }
     })
+    
       .then(function (librosEncontrados) {
+       
         return res.render("resultados", {
           resultados: librosEncontrados,
           query: query
