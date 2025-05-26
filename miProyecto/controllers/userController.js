@@ -22,19 +22,23 @@ const userController = {
     let fecha_nacimiento = req.body.fecha_nacimiento;
     let error = {};
 
-    if (!usuario) {
+    if (usuario == "") {
       error.usuario = "Nombre de usuario obligatorio";
+      return res.render("register", { error });
+
     }
 
-    if (!email) {
+    if (email =="") {
       error.email = "Email obligatorio";
+            return res.render("register", { error });
+
     }
 
-    if (!contrasena || contrasena.length < 3) {
+    if (contrasena =="" || contrasena.length < 3) {
       error.contrasena = "La contraseña debe tener al menos 3 caracteres";
     }
 
-    if (!fecha_nacimiento) {
+    if (fecha_nacimiento =="") {
       error.fecha_nacimiento = "La fecha de nacimiento es obligatoria";
     }
 
@@ -68,7 +72,7 @@ const userController = {
     if (req.session.usuario != undefined) {
       return res.redirect("/");
     } else {
-      return res.render("login");
+      return res.render("login", { error: {} });
     }
   },
   createLogin: function (req, res) {
