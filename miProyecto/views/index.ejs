@@ -50,25 +50,6 @@
                   <p>
                     <%= productos[i].descripcion %>
                   </p>
-
-                  <% for (let j=0; j < productos[i].comentarios.length; j++) { %>
-                    <div class="comentario">
-                      <% if (productos[i].comentarios[j].usuario) { %>
-                        <img src="<%= productos[i].comentarios[j].usuario.foto_perfil %>" alt="Foto Perfil"
-                          class="comentario-img fotoRadio">
-                        <strong>
-                          <%= productos[i].comentarios[j].usuario.usuario %>
-                        </strong>
-                        <% } else { %>
-                          <img src="/images/default.jpg" alt="Sin foto" class="comentario-img fotoRadio">
-                          <strong>Anónimo</strong>
-                          <% } %>
-                            <p>
-                              <%= productos[i].comentarios[j].texto %>
-                            </p>
-                    </div>
-                    <% } %>
-
                 </article>
               </a>
             </section>
