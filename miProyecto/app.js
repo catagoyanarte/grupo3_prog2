@@ -27,6 +27,26 @@ app.use(session({
   saveUninitialized : true
 }));
 
+// middleware de session hacia vistas
+app.use(function(req, res, next) {
+  // que quiero hacer en cada ida y vuelta 
+  if ( req.session.user != undefined) {
+        res.locals.user = req.session.user;
+  }
+  return next();
+});
+
+// middleware de cookies hacia vistas
+app.use(function(req, res, next) {
+  // que quiero hacer en cada ida y vuelta 
+
+  if (req.cookies.user != undefined && req.session.user == undefined) {
+    res.locals.user = req.cookies.user;
+    req.session.user = req.cookies.user;
+  }
+  return next();
+})
+
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
 app.use('/products', productsRoutes);
