@@ -18,11 +18,25 @@ let productoController = {
       ]
     })
       .then(function (producto) {
-        return res.render("producto", { producto });
+        if (!producto) return res.redirect("/");
+
+        db.Comentario.findAll({
+          where: { id_producto: id },
+          include: [{ association: "usuario" }],
+          order: [['createdAt', 'DESC']]
+
+        }).then(function (comentarios) {
+          return res.render("producto", {
+            producto,
+            comentarios,
+            session: req.session
+          });
+        });
       })
       .catch(function (err) {
-        return console.log(err);
-      })
+        console.log(err);
+        return res.redirect("/");
+      });
   },
 
   search: function (req, res) {
@@ -31,11 +45,11 @@ let productoController = {
 
     if (query == "") {
 
-        error.librosEncocontrados = "Ingresa un libro encontrado";
-        return res.render("resultados", { error, resultados: [] });
-        
-      }
-    
+      error.librosEncocontrados = "Ingresa un libro encontrado";
+      return res.render("resultados", { error, resultados: [] });
+
+    }
+
 
     db.Producto.findAll({
       where: {
@@ -44,9 +58,9 @@ let productoController = {
         }
       }
     })
-    
+
       .then(function (librosEncontrados) {
-       
+
         return res.render("resultados", {
           resultados: librosEncontrados,
           query: query

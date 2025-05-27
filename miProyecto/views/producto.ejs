@@ -2,81 +2,82 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> The Good Nook </title>
-    <!-- Font Awesome Stylesheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <!-- Bootstrap Grid Stylesheet -->
-    <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
-    <!-- Own Stylesheet -->
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <title> The Good Nook </title>
+  <!-- Font Awesome Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <!-- Bootstrap Grid Stylesheet -->
+  <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+  <!-- Own Stylesheet -->
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-    <%- include('partials/header') %>
-        <!-- product detail -->
-        <div class="container products-wrapper">
-  <div class="d-flex align-items-center">
-    <h2 class="products-title"><%= producto.nombre %></h2> 
-  </div>
-  <div class="product-detail">
-    <div class="row">
-      <article class="col-12 col-lg-8 product-detail-info">
-        <img src="<%= producto.foto_producto %>" alt="" class="product-detail-img">
-        <p class="product-detail-description">
-          <%= producto.descripcion %>
-        </p>
-      </article>
-      <div class="col-12 col-lg-4">
-        <section class="comments">
-          <% for (let j = 0; j < producto.comentarios.length; j++) { %>
-            <article>
-              <% if (producto.comentarios[j].usuario) { %>
-                <img src="<%= producto.comentarios[j].usuario.foto_perfil %>" alt="">
-                <div class="producto">
-                  <p class="user">
-                    <strong>
-                      <a href="/usuarios/perfil/<%= producto.comentarios[j].usuario.id %>">
-                        <%= producto.comentarios[j].usuario.usuario %>:
-                      </a>
-                    </strong>
-                    <%= producto.comentarios[j].texto %>
-                  </p>
-                </div>
-              <% } else { %>
-                <img src="/images/default.jpg" alt="Sin foto">
-                <div class="producto">
-                  <p class="user">
-                    <strong><a href="#">Anónimo:</a></strong>
-                    <%= producto.comentarios[j].texto %>
-                  </p>
-                </div>
-              <% } %>
-            </article>
-          <% } %>
-        </section>
+  <%- include('partials/header') %>
+    <!-- product detail -->
+    <div class="container products-wrapper">
+      <div class="d-flex align-items-center">
+        <h2 class="products-title">
+          <%= producto.nombre %>
+        </h2>
+      </div>
+      <div class="product-detail">
+        <div class="row">
+          <article class="col-12 col-lg-8 product-detail-info">
+            <img src="<%= producto.foto_producto %>" alt="" class="product-detail-img">
+            <p class="product-detail-description">
+              <%= producto.descripcion %>
+            </p>
+          </article>
+          <div class="col-12 col-lg-4">
+            <section class="comments">
+              <% for (let j=0; j < comentarios.length; j++) { %>
+                <article>
+                  <% if (comentarios[j].usuario) { %>
+                    <img src="<%= comentarios[j].usuario.foto_perfil %>" alt="">
+                    <div class="producto">
+                      <p class="user">
+                        <strong>
+                          <a href="/usuarios/perfil/<%= comentarios[j].usuario.id %>">
+                            <%= comentarios[j].usuario.usuario %>:
+                          </a>
+                        </strong>
+                        <%= comentarios[j].texto %>
+                      </p>
+                    </div>
+                </article>
+                <% } %>
+            </section>
 
-        <form class="form" action="/comentarios/agregar/<%= producto.id_producto %>" method="POST">
-          <input class="form-input" type="text" name="texto" placeholder="Agregar comentario" required>
-          <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-        </form>
-        <hr>
+            <% if (session.user) { %>
+              <form class="form" action="/comentarios/agregar/<%= producto.id_producto %>" method="POST">
+                <input class="form-input" type="text" name="texto" placeholder="Agregar comentario" required>
+                <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+              </form>
+              <% } else { %>
+                <p><a href="/users/login">Iniciá sesión para comentar</a></p>
+                <% } %>
+
+                  <hr>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-        
-        <!-- /product detail -->
 
-        <%- include('partials/footer') %>
+    <!-- /product detail -->
+
+    <%- include('partials/footer') %>
 </body>
 
 </html>
