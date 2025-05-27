@@ -68,14 +68,10 @@ const userController = {
           });
    
   }
-
-
-       
-
       });
   },
-  showLogin: function (req, res) {
-    if (req.session.usuario != undefined) {
+  showLogin: function (req, res) { // control de acceso
+    if (req.session.user != undefined) {
       return res.redirect("/");
     } else {
       return res.render("login", { error: {} });
@@ -89,9 +85,10 @@ const userController = {
     let error = {};
 
     let userInfo = {
-      email: email,
-      contrasena: contrasena,
-      recordarme: recordarme
+      id: user.id,
+      email: user.email,
+      contrasena: user.contrasena,
+      recordarme: user.recordarme
     }
 
     // valido que email y contrasena sean correctas
@@ -104,8 +101,8 @@ const userController = {
         }
       });
 
-    let validacion = bcrypt.compareSync(req.body.contrasena, contrasena);
-    if (validacion == "") {
+    let validacion = bcrypt.compareSync(contrasena, user.contrasena);
+    if (validacion == False) {
       req.session.user = contrasena;
       error.contrasena = "Esta contrasena no es valida";
       return res.render("login", { error: {} })
@@ -119,7 +116,7 @@ const userController = {
       res.cookie("user", userInfo, { maxAge: 150000 });
     }
 
-    res.redirect("/profile")
+    res.redirect("/users/profile")
 
   },
 
@@ -128,12 +125,17 @@ const userController = {
     res.clearCookie("user");
     return res.redirect("/")
   },
+   catch (error) {
+    console.log(error);
+    return res.send(error);
+  },
 
   profile: function (req, res) {
-    let nombreUsuario = users.usuario;
-    let productos = products.producto;
-    res.render('perfil', { user: nombreUsuario, productos: productos });
-  }
+    db.Usuario.findByPk(userInfo.id)
+    .then(function (user) {
+    res.render('perfil', { user: user, productos: productos });
+  });
+}
 };
 
 
