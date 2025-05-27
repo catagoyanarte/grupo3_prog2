@@ -47,77 +47,79 @@ const userController = {
     db.Usuario.findOne({ where: { email: email } })
       .then(function (user) {
 
-  if (user != undefined) {
+        if (user != undefined) {
 
-     return res.send("El email ya existe")
-  }else{ 
-     let nuevoUsuario = {
-          usuario: usuario,
-          email: email,
-          contrasena: bcryptjs.hashSync(contrasena, 10),
-          fecha_nacimiento: fecha_nacimiento,
-          //falta el created
-        };
+          return res.send("El email ya existe")
+        } else {
+          let nuevoUsuario = {
+            usuario: usuario,
+            email: email,
+            contrasena: bcryptjs.hashSync(contrasena, 10),
+            fecha_nacimiento: fecha_nacimiento,
+            //falta el created
+          };
 
-        db.Usuario.create(nuevoUsuario)
-          .then(function () {
-            return res.redirect("/users/login");
-          })
-          .catch(function (error) {
-            return res.send(error);
-          });
-   
-  }
-      });
-  },
-  showLogin: function (req, res) { // control de acceso
-    if (req.session.user != undefined) {
-      return res.redirect("/");
-    } else {
-      return res.render("login", { error: {} });
-    }
-  },
-  createLogin: function (req, res) {
-    // recupero los datos del form
-    let email = req.body.email;
-    let contrasena = req.body.contrasena;
-    let recordarme = req.body.recordarme;
-    let error = {};
-
-    let userInfo = {
-      id: user.id,
-      email: user.email,
-      contrasena: user.contrasena,
-      recordarme: user.recordarme
-    }
-
-    // valido que email y contrasena sean correctas
-
-    db.Usuario.findOne({ where: { email: email } })
-      .then(function (user) {
-        if (user) {
-          error.email = "Este email no ha sido registrado";
-          return res.render("login", { error: {} })
+          db.Usuario.create(nuevoUsuario)
+            .then(function () {
+              return res.redirect("/users/login");
+            })
+            .catch(function (error) {
+              console.log(error);
+              return res.send(error);
+            });
         }
       });
+  },
+  showLogin: function(req, res) {
+  //  return res.render("login");
+  //showLogin: function (req, res) { // control de acceso
+  //  if (req.session.user != undefined) {
+  //    return res.redirect("/");
+  //  } else {
+      return res.render("login", { error: {} });
+  //  }
+  },
 
-    let validacion = bcrypt.compareSync(contrasena, user.contrasena);
-    if (validacion == False) {
-      req.session.user = contrasena;
-      error.contrasena = "Esta contrasena no es valida";
-      return res.render("login", { error: {} })
-    }
+  createLogin: function (req, res) {
 
-    //poner al usuario en session
-    req.session.user = userInfo;
+    // recupero los datos del form
+    let userInfo = {
+      email: req.body.email,
+      contrasena: req.body.contrasena,
+      recordarme: req.body.recordarme
+    };
 
-    // recordarme - creo una cookie
-    if (req.body.recordarme != undefined) {
-      res.cookie("user", userInfo, { maxAge: 150000 });
-    }
+    // valido que email y contrasena sean correctas
+    db.Usuario.findOne({ where: { email: userInfo.email } })
+      .then(function (user) {
+        if (!user) {
+          let error = {email: "Este email no ha sido registrado"};
+          return res.render("login", { error: error })
+        }
 
-    res.redirect("/users/profile")
+        let validacion = bcrypt.compareSync(userInfo.contrasena, user.contrasena);
 
+        if (!validacion) {
+    //      req.session.user = contrasena;
+          let error = {contrasena: "Esta contrasena no es valida"};
+          return res.render("login", { error: error })
+        }
+
+        //poner al usuario en session
+        req.session.user = userInfo;
+
+        // recordarme - creo una cookie
+        if (req.body.recordarme != undefined) {
+          res.cookie("user", user.email, { maxAge: 150000 });
+        }
+
+        return res.redirect("/users/profile");
+
+      })
+      .catch( function (error){
+      console.log(error);
+      return res.send(error);
+     });
   },
 
   logout: function (req, res) {
@@ -125,42 +127,38 @@ const userController = {
     res.clearCookie("user");
     return res.redirect("/")
   },
-   catch (error) {
-    console.log(error);
-    return res.send(error);
-  },
 
   profile: function (req, res) {
-    db.Usuario.findByPk(userInfo.id)
-    .then(function (user) {
-    res.render('perfil', { user: user, productos: productos });
-  });
-}
+    db.Usuario.findByPk(req.session.user)
+      .then(function (user) {
+        res.render('perfil', { user: user});
+      });
+  }
 };
 
 
-// if (userInfo.email !== email) {
-//   error.email = "Este mail no ha sido registrado.";
-// } else {
+  // if (userInfo.email !== email) {
+  //   error.email = "Este mail no ha sido registrado.";
+  // } else {
 
-// }
-// if (userInfo.contrasena !== contrasena) {
-//   error.email = "La contrasena no corresponde al mail registrado.";
-// } else {
+  // }
+  // if (userInfo.contrasena !== contrasena) {
+  //   error.email = "La contrasena no corresponde al mail registrado.";
+  // } else {
 
-/*
-const userController = {
-  register: function(req, res) {
-    res.render('register');
-  },
-  login: function(req, res) {
-    res.render('login');
-  },
-  profile: function(req, res) {
-    let nombreUsuario = users.usuario; 
-    let productos = products.producto;
-    res.render('perfil', {user: nombreUsuario, productos: productos});
-  }
-};*/
+  /*
+  const userController = {
+    register: function(req, res) {
+      res.render('register');
+    },
+    login: function(req, res) {
+      res.render('login');
+    },
+    profile: function(req, res) {
+      let nombreUsuario = users.usuario; 
+      let productos = products.producto;
+      res.render('perfil', {user: nombreUsuario, productos: productos});
+    }
+  };*/
 
-module.exports = userController;
+  module.exports = userController;
