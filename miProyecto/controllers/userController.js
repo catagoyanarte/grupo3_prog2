@@ -1,7 +1,7 @@
 //const users = require('../db/users');
 //const products = require('../db/products');
 const db = require('../database/models');
-const bcryptjs = require("bcryptjs");
+const bcryptjs = require('bcryptjs');
 
 const userController = {
 
@@ -70,95 +70,103 @@ const userController = {
         }
       });
   },
-  showLogin: function(req, res) {
-  //  return res.render("login");
-  //showLogin: function (req, res) { // control de acceso
-  //  if (req.session.user != undefined) {
-  //    return res.redirect("/");
-  //  } else {
-      return res.render("login", { error: {} });
-  //  }
+
+  showLogin: function (req, res) {
+    return res.render("login");
   },
 
   createLogin: function (req, res) {
-
-    // recupero los datos del form
     let userInfo = {
       email: req.body.email,
-      contrasena: req.body.contrasena,
+      password: req.body.contrasena,
       recordarme: req.body.recordarme
     };
 
-    // valido que email y contrasena sean correctas
     db.Usuario.findOne({ where: { email: userInfo.email } })
       .then(function (user) {
-        if (!user) {
-          let error = {email: "Este email no ha sido registrado"};
-          return res.render("login", { error: error })
+        if (user == undefined) {
+          return res.send("este email no existe");
         }
 
-        let validacion = bcrypt.compareSync(userInfo.contrasena, user.contrasena);
-
+        let validacion = bcryptjs.compareSync(userInfo.password, user.contrasena);
         if (!validacion) {
-    //      req.session.user = contrasena;
-          let error = {contrasena: "Esta contrasena no es valida"};
-          return res.render("login", { error: error })
+          return res.send("contrasena incorrecta");
         }
 
-        //poner al usuario en session
-        req.session.user = userInfo;
+        req.session.user = {
+          id: user.id,
+          email: user.email,
+          usuario: user.usuario
+        };
 
-        // recordarme - creo una cookie
-        if (req.body.recordarme != undefined) {
-          res.cookie("user", user.email, { maxAge: 150000 });
+        if (userInfo.recordarme != undefined) {
+          res.cookie("user", user, { maxAge: 150000 });
         }
 
         return res.redirect("/users/profile");
-
       })
-      .catch( function (error){
-      console.log(error);
-      return res.send(error);
-     });
+      .catch(function (error) {
+        console.log(error);
+        return res.send("error en login");
+      });
   },
 
   logout: function (req, res) {
     req.session.destroy();
     res.clearCookie("user");
-    return res.redirect("/")
+    return res.redirect("/");
   },
 
-  profile: function (req, res) {
-    db.Usuario.findByPk(req.session.user)
-      .then(function (user) {
-        res.render('perfil', { user: user});
+  profile: function(req, res) {
+    if (!req.session.user || !req.session.user.id) {  // verificamos que el usuario este en session 
+      return res.redirect('/users/login');
+    }
+  
+    // busco al usuario en session por su id 
+    db.Usuario.findByPk(req.session.user.id)
+      .then(function(user) {
+        if (!user) {
+          return res.redirect('/users/login');
+        }
+        // busco los productos
+        return db.Producto.findAll()
+          .then(function(productos) { 
+            res.render('perfil', { user, productos });
+          });
+      })
+      .catch(function(error) {
+        console.log(error);
+        res.send("error al mostrar el perfil");
       });
   }
-};
+}
+
+module.exports = userController;
+
+      
+      
 
 
-  // if (userInfo.email !== email) {
-  //   error.email = "Este mail no ha sido registrado.";
-  // } else {
+// if (userInfo.email !== email) {
+//   error.email = "Este mail no ha sido registrado.";
+// } else {
 
-  // }
-  // if (userInfo.contrasena !== contrasena) {
-  //   error.email = "La contrasena no corresponde al mail registrado.";
-  // } else {
+// }
+// if (userInfo.contrasena !== contrasena) {
+//   error.email = "La contrasena no corresponde al mail registrado.";
+// } else {
 
-  /*
-  const userController = {
-    register: function(req, res) {
-      res.render('register');
-    },
-    login: function(req, res) {
-      res.render('login');
-    },
-    profile: function(req, res) {
-      let nombreUsuario = users.usuario; 
-      let productos = products.producto;
-      res.render('perfil', {user: nombreUsuario, productos: productos});
-    }
-  };*/
-
-  module.exports = userController;
+/*
+const userController = {
+  register: function(req, res) {
+    res.render('register');
+  },
+  login: function(req, res) {
+    res.render('login');
+  },
+  profile: function(req, res) {
+    let nombreUsuario = users.usuario; 
+    let productos = products.producto;
+    res.render('perfil', {user: nombreUsuario, productos: productos});
+  }
+};*/

@@ -32,24 +32,23 @@
                 <h2 class="col-12">
                     <main class="body_register">
                         <section  class="login-container">
-                            <form action="/users/login" method="post"  class="register-form">
+                            <form action="/users/login" method="POST"  class="register-form">
                                 <div class="form-group">
                                     <label class="labell" for="email">Email</label>
-                                    <input class="inputt" type="email" id="email" name="usuario" placeholder="Ingresa tu correo">
-                                    <% if (error.email) { %><p class="error"><%= error.email %></p><% } %>
+                                    <input class="inputt" type="email" id="email" name="email" placeholder="Ingresa tu correo">
+                                  
                                 </div>
         
                                 <div class="form-group">
                                     <label class="labell" for="password">Contraseña</label>
-                                    <input class="inputt" type="password" id="password" name="password" placeholder="Crea una contraseña">
-                                    <% if (error.contrasena) { %><p class="error"><%= error.contrasena %></p><% } %>
+                                    <input class="inputt" type="password" id="password" name="contrasena" placeholder="Crea una contraseña">
+
 
                                   </div>
                                     <input class="labell" type="checkbox" id="recordarme" name="recordarme"> Recordarme
                                 </label>
                                
-                                <button type="submit">  <a href="/users/profile"> Entrar
-                                </a></button>
+                                <button type="submit"> Entrar </button>
                             </form>
                         </section>
                     </main>
