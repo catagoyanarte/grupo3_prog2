@@ -56,7 +56,7 @@ const userController = {
             email: email,
             contrasena: bcryptjs.hashSync(contrasena, 10),
             fecha_nacimiento: fecha_nacimiento,
-            //falta el created
+            createdAt: new Date()
           };
 
           db.Usuario.create(nuevoUsuario)
