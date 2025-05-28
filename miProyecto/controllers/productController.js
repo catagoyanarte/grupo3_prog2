@@ -39,6 +39,10 @@ let productoController = {
       });
   },
 
+  agregarProductos: function (req, res) {
+    return res.render("product-add");
+  },
+
   search: function (req, res) {
     let query = req.query.search;
     error = {}

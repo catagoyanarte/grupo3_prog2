@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link width="" rel="shortcut icon" href="./images/logo-mercado-liebre.jpg" />
+
+    <title>The Good Nook</title>
+    <!-- Font Awesome Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- Bootstrap Grid Stylesheet -->
+    <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+    <!-- Own Stylesheet -->
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+
+<body> <%- include('partials/header') %>
+        <!-- /Header -->
+
+        <!-- Novedades -->
+        <div class="container products-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="products-title">Agregar productos</h2>
+                </div>
+
+                <section class="register-container">
+                    <form action="/products/product-add" method="POST" class="register-form">
+
+                        <div class="form-group">
+                            <label class="labell" for="fotoProducto">Nombre del archivo de imagen:</label>
+                            <input class="inputt" name="foto_producto" id="foto_producto"  required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="labell" for="nombreProducto">Nombre del producto:</label>
+                            <input class="inputt" name="nombre" id="nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="labell" for="descripcion">Descripción corta:</label>
+                            <input class="inputt" name="descripcion" id="descripcion">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Crear producto</button>
+                </form>
+                </section>
+             
+
+
+                <!-- footer -->
+                <%- include('partials/footer') %>
+                    <!-- /footer -->
+</body>
+
+</html>
