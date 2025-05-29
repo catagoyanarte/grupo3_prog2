@@ -16,8 +16,12 @@
     <link rel="stylesheet" href="./css/app.css">
 </head>
 
-<body> <%- include('partials/header') %>
-        <!-- /Header -->
+<body>
+
+    <!-- /Header -->
+    <%- include('partials/headerLogueado')%>
+
+
 
         <!-- Novedades -->
         <div class="container products-wrapper">
@@ -27,28 +31,29 @@
                 </div>
 
                 <section class="register-container">
-                    <form action="/products/product-add" method="POST" class="register-form">
-
-                        <div class="form-group">
-                            <label class="labell" for="fotoProducto">Nombre del archivo de imagen:</label>
-                            <input class="inputt" name="foto_producto" id="foto_producto"  required>
-
-                        </div>
+                    <form action="/products/productAdd" method="POST" class="register-form">
 
                         <div class="form-group">
                             <label class="labell" for="nombreProducto">Nombre del producto:</label>
                             <input class="inputt" name="nombre" id="nombre" required>
                         </div>
 
+
+
+                        <div class="form-group">
+                            <label class="labell" for="fotoProducto">Nombre del archivo de imagen:</label>
+                            <input class="inputt" name="foto_producto" id="foto_producto" required>
+
+                        </div>
                         <div class="form-group">
                             <label class="labell" for="descripcion">Descripción corta:</label>
                             <input class="inputt" name="descripcion" id="descripcion">
-                    </div>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Crear producto</button>
-                </form>
+                        <button type="submit" class="btn btn-primary">Crear producto</button>
+                    </form>
                 </section>
-             
+
 
 
                 <!-- footer -->

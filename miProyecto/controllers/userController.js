@@ -8,7 +8,7 @@ const userController = {
   show: function (req, res) {
 
     if (req.session.user != undefined) {
-      return res.redirect('/register' + req.session.user.id)
+      return res.redirect('/register' )
     } else {
       return res.render("register", { error: {} });
     }
@@ -23,7 +23,7 @@ create: function (req, res) {
     let error = {};
 
     if (usuario == "") {
-      error.usuario = "Nombre de usuario obligatorio";
+      error.usuario = "Nombre de  obligatorio";
       return res.render("register", { error });
 
     }

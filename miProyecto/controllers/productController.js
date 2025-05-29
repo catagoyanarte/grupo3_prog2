@@ -39,24 +39,31 @@ let productoController = {
       });
   },
 
-   agregarproducto: function (req, res) {
-     if (req.session.user == undefined) {
-      return res.redirect('/');
-    } else {
-      return res.render("product-add",  { error: {} });
+  agregarproducto: function (req, res) {
+    if (!req.session.user) {
+      return res.redirect('/users/login');
     }
+    return res.render("product-add");
   },
 
-  
+  showAgregarProducto: function (req, res) {
+
+    let nombre = req.body.nombre;
+    let foto_producto = req.body.foto_producto;
+    let descripcion = req.body.descripcion;
+    let createdAt = req.body.createdAt;
+    let updatedAt = req.body.updatedAt;
+    let deletedAt = req.body.deletedAt;
+    let id_usuario = req.body.id_usuario;
+    let error = {};
 
 
+  },
   search: function (req, res) {
     let query = req.query.search;
     error = {}
 
     if (query == "") {
-
-      error.librosEncocontrados = "Ingresa un libro encontrado";
       return res.render("resultados", { error, resultados: [] });
 
     }
