@@ -43,13 +43,23 @@ create: function (req, res) {
       return res.render("register", { error });
     }
 
-    db.Usuario.findOne({ where: { email: email } })
+    db.Usuario.findOne({ where: { email: email} })
       .then(function (user) {
 
         if (user != undefined) {
 
           return res.send("El email ya existe")
-        } else {
+        }  
+
+      db.Usuario.findOne({where: {usuario: usuario}})
+
+          .then(function (usuario_1) {
+            if (usuario_1 != undefined) {
+              return res.send("El usuario ya existe")
+            }
+          })
+
+        
           let nuevoUsuario = {
             usuario: usuario,
             email: email,
@@ -66,7 +76,7 @@ create: function (req, res) {
               return res.send(error);
             });
         }
-      });
+      );
   },
 
   showLogin: function (req, res) {
