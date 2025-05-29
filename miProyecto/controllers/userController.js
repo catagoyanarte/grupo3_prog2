@@ -84,6 +84,7 @@ create: function (req, res) {
   },
  createLogin: function (req, res) {
     let userInfo = {
+      id: req.body.id,
       email: req.body.email,
       password: req.body.contrasena,
       recordarme: req.body.recordarme
