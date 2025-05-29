@@ -13,17 +13,17 @@
         <div class="row align-items-center">
             <div class="col-5 col-md-2">
                 <a href="index.ejs" class="main-header_home-link">
-                    <img src="/images/logo.jpg">
+                    <img class="imagenn" src="/images/logo.jpg">
                 </a>
             </div>
-
-            <div class="col-7 col-md-6">
-                <form action="" method="GET" class="search-form">
-                    <input type="text" name="search" placeholder="Buscar productos, marcas y más"
+<div class="col-7 col-md-6">
+                <form action="/products/search" method="GET" class="search-form">
+                    <input type="text" name="search" placeholder="Encontrá el libro que estás buscando"
                         class="search-form_input">
                     <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
                 </form>
             </div>
+          
 
             <div class="col-12 col-md-4">
                 <a class="main-header_credit-link">
@@ -40,7 +40,8 @@
         <nav class="main-navbar">
             <ul class="left-navbar">
                 <li><a href="/">Todos los productos</a></li>
-                <li><a href="product-add.html">Cargar productos</a></li>
+             
+                <li> <a class="main-header_credit-link" href="/products/productAdd">Agregar más productos</a></li>
             </ul>
 
             <ul class="right-navbar">

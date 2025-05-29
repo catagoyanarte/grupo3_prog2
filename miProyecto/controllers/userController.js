@@ -8,13 +8,13 @@ const userController = {
   show: function (req, res) {
 
     if (req.session.user != undefined) {
-      return res.redirect('/register' + req.session.user.id)
+      return res.redirect('/register' )
     } else {
       return res.render("register", { error: {} });
     }
 
   },
-  create: function (req, res) {
+create: function (req, res) {
 
     let usuario = req.body.usuario;
     let email = req.body.email;
@@ -23,7 +23,7 @@ const userController = {
     let error = {};
 
     if (usuario == "") {
-      error.usuario = "Nombre de usuario obligatorio";
+      error.usuario = "Nombre de usuario  obligatorio";
       return res.render("register", { error });
 
     }
@@ -38,19 +38,28 @@ const userController = {
       error.contrasena = "La contraseña debe tener al menos 3 caracteres";
       return res.render("register", { error });
     }
-
-    if (fecha_nacimiento == "") {
+ if (fecha_nacimiento == "") {
       error.fecha_nacimiento = "La fecha de nacimiento es obligatoria";
       return res.render("register", { error });
     }
 
-    db.Usuario.findOne({ where: { email: email } })
+    db.Usuario.findOne({ where: { email: email} })
       .then(function (user) {
 
         if (user != undefined) {
 
           return res.send("El email ya existe")
-        } else {
+        }  
+
+      db.Usuario.findOne({where: {usuario: usuario}})
+
+          .then(function (usuario_1) {
+            if (usuario_1 != undefined) {
+              return res.send("El usuario ya existe")
+            }
+          })
+
+        
           let nuevoUsuario = {
             usuario: usuario,
             email: email,
@@ -58,8 +67,7 @@ const userController = {
             fecha_nacimiento: fecha_nacimiento,
             createdAt: new Date()
           };
-
-          db.Usuario.create(nuevoUsuario)
+     db.Usuario.create(nuevoUsuario)
             .then(function () {
               return res.redirect("/users/login");
             })
@@ -68,15 +76,15 @@ const userController = {
               return res.send(error);
             });
         }
-      });
+      );
   },
 
   showLogin: function (req, res) {
     return res.render("login");
   },
-
-  createLogin: function (req, res) {
+ createLogin: function (req, res) {
     let userInfo = {
+      id: req.body.id,
       email: req.body.email,
       password: req.body.contrasena,
       recordarme: req.body.recordarme
@@ -98,8 +106,7 @@ const userController = {
           email: user.email,
           usuario: user.usuario
         };
-
-        if (userInfo.recordarme != undefined) {
+   if (userInfo.recordarme != undefined) {
           res.cookie("user", user, { maxAge: 150000 });
         }
 
@@ -121,8 +128,7 @@ const userController = {
     if (!req.session.user || !req.session.user.id) {  // verificamos que el usuario este en session 
       return res.redirect('/users/login');
     }
-  
-    // busco al usuario en session por su id 
+ // busco al usuario en session por su id 
     db.Usuario.findByPk(req.session.user.id)
       .then(function(user) {
         if (!user) {
@@ -143,32 +149,4 @@ const userController = {
   
 }
 
-module.exports = userController;
-
-      
-      
-
-
-// if (userInfo.email !== email) {
-//   error.email = "Este mail no ha sido registrado.";
-// } else {
-
-// }
-// if (userInfo.contrasena !== contrasena) {
-//   error.email = "La contrasena no corresponde al mail registrado.";
-// } else {
-
-/*
-const userController = {
-  register: function(req, res) {
-    res.render('register');
-  },
-  login: function(req, res) {
-    res.render('login');
-  },
-  profile: function(req, res) {
-    let nombreUsuario = users.usuario; 
-    let productos = products.producto;
-    res.render('perfil', {user: nombreUsuario, productos: productos});
-  }
-};*/
+module.exports = userController;
