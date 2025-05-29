@@ -47,14 +47,15 @@ let productoController = {
   },
 
   mostrar: function (req, res) {
-
+  
+    
     let nombre = req.body.nombre;
     let foto_producto = req.body.foto_producto;
     let descripcion = req.body.descripcion;
     let createdAt = req.body.createdAt;
     let updatedAt = req.body.updatedAt;
     let deletedAt = req.body.deletedAt;
-    let id_usuario = req.body.user.id;
+  
     let error = {};
 
 
@@ -81,7 +82,7 @@ let productoController = {
       nombre: nombre,
       foto_producto: foto_producto,
       descripcion: descripcion,
-      id_usuario: id_usuario,
+
       createdAt: new Date()
     };
     db.Producto.create(nuevoProducto)
