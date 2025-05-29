@@ -63,7 +63,17 @@
 
 
                                                     </article>
+
                                                 </a>
+                                                <% if (resultados[i].usuario) { %>
+                                                    <p>
+                                                        Subido por:
+                                                        <a
+                                                            href="/users/profile/<%= resultados[i].usuario.id_usuario %>">
+                                                            <%= resultados[i].usuario.usuario %>
+                                                        </a>
+                                                    </p>
+                                                    <% } %>
                                             </section>
                                         </div>
                                         <% } %>

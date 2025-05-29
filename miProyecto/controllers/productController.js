@@ -43,7 +43,7 @@ let productoController = {
     if (!req.session.user) {
       return res.redirect('/users/login');
     }
-    return res.render("product-add" , { error: {}, user: req.session.user, });
+    return res.render("product-add", { error: {}, user: req.session.user, });
   },
 
   mostrar: function (req, res) {
@@ -54,25 +54,25 @@ let productoController = {
     let createdAt = req.body.createdAt;
     let updatedAt = req.body.updatedAt;
     let deletedAt = req.body.deletedAt;
-    let id_usuario = req.body.id_usuario;
+    let id_usuario = req.body.user.id;
     let error = {};
 
 
     if (nombre == "") {
       error.nombre = "Nombre de producto obligatorio";
-      return res.render("product-add", {   error, user: req.session.user  });
+      return res.render("product-add", { error, user: req.session.user });
 
     }
 
     if (foto_producto == "") {
       error.foto_producto = "Foto del producto obligatoria";
-      return res.render("product-add",  { error, user: req.session.user });
+      return res.render("product-add", { error, user: req.session.user });
 
     }
 
     if (descripcion == "") {
       error.descripcion = "Descripcion obligatoria";
-      return res.render("product-add",  { error, user: req.session.user });
+      return res.render("product-add", { error, user: req.session.user });
     }
 
 
@@ -81,6 +81,7 @@ let productoController = {
       nombre: nombre,
       foto_producto: foto_producto,
       descripcion: descripcion,
+      id_usuario: id_usuario,
       createdAt: new Date()
     };
     db.Producto.create(nuevoProducto)
@@ -110,7 +111,8 @@ let productoController = {
         nombre: {
           [op.like]: '%' + query + '%'
         }
-      }
+      },
+      include: [{ association: "usuario" }]
     })
 
       .then(function (librosEncontrados) {
