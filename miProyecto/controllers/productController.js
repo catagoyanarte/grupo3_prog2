@@ -43,10 +43,10 @@ let productoController = {
     if (!req.session.user) {
       return res.redirect('/users/login');
     }
-    return res.render("product-add");
+    return res.render("product-add" , { error: {}, user: req.session.user, });
   },
 
-  showAgregarProducto: function (req, res) {
+  mostrar: function (req, res) {
 
     let nombre = req.body.nombre;
     let foto_producto = req.body.foto_producto;
@@ -58,10 +58,46 @@ let productoController = {
     let error = {};
 
 
+    if (nombre == "") {
+      error.nombre = "Nombre de producto obligatorio";
+      return res.render("product-add", {   error, user: req.session.user  });
+
+    }
+
+    if (foto_producto == "") {
+      error.foto_producto = "Foto del producto obligatoria";
+      return res.render("product-add",  { error, user: req.session.user });
+
+    }
+
+    if (descripcion == "") {
+      error.descripcion = "Descripcion obligatoria";
+      return res.render("product-add",  { error, user: req.session.user });
+    }
+
+
+
+    let nuevoProducto = {
+      nombre: nombre,
+      foto_producto: foto_producto,
+      descripcion: descripcion,
+      createdAt: new Date()
+    };
+    db.Producto.create(nuevoProducto)
+      .then(function () {
+        return res.redirect("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+        return res.send(error);
+      });
+
+
   },
   search: function (req, res) {
     let query = req.query.search;
     error = {}
+
 
     if (query == "") {
       return res.render("resultados", { error, resultados: [] });

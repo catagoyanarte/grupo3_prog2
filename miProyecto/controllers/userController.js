@@ -23,7 +23,7 @@ create: function (req, res) {
     let error = {};
 
     if (usuario == "") {
-      error.usuario = "Nombre de  obligatorio";
+      error.usuario = "Nombre de usuario  obligatorio";
       return res.render("register", { error });
 
     }
