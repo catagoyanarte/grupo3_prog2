@@ -138,7 +138,9 @@ const userController = {
         console.log(error);
         res.send("error al mostrar el perfil");
       });
-  }
+  },
+
+  
 }
 
 module.exports = userController;
