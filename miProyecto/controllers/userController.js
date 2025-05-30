@@ -167,7 +167,8 @@ const userController = {
         console.log(error);
         res.send("Error al mostrar el perfil del usuario");
       });
-  }
+  },
+
   
 }
 
