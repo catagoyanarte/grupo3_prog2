@@ -8,13 +8,13 @@ const userController = {
   show: function (req, res) {
 
     if (req.session.user != undefined) {
-      return res.redirect('/register' )
+      return res.redirect('/register')
     } else {
       return res.render("register", { error: {} });
     }
 
   },
-create: function (req, res) {
+  create: function (req, res) {
 
     let usuario = req.body.usuario;
     let email = req.body.email;
@@ -38,20 +38,20 @@ create: function (req, res) {
       error.contrasena = "La contraseña debe tener al menos 3 caracteres";
       return res.render("register", { error });
     }
- if (fecha_nacimiento == "") {
+    if (fecha_nacimiento == "") {
       error.fecha_nacimiento = "La fecha de nacimiento es obligatoria";
       return res.render("register", { error });
     }
 
-    db.Usuario.findOne({ where: { email: email} })
+    db.Usuario.findOne({ where: { email: email } })
       .then(function (user) {
 
         if (user != undefined) {
 
           return res.send("El email ya existe")
-        }  
+        }
 
-      db.Usuario.findOne({where: {usuario: usuario}})
+        db.Usuario.findOne({ where: { usuario: usuario } })
 
           .then(function (usuario_1) {
             if (usuario_1 != undefined) {
@@ -59,30 +59,30 @@ create: function (req, res) {
             }
           })
 
-        
-          let nuevoUsuario = {
-            usuario: usuario,
-            email: email,
-            contrasena: bcryptjs.hashSync(contrasena, 10),
-            fecha_nacimiento: fecha_nacimiento,
-            createdAt: new Date()
-          };
-     db.Usuario.create(nuevoUsuario)
-            .then(function () {
-              return res.redirect("/users/login");
-            })
-            .catch(function (error) {
-              console.log(error);
-              return res.send(error);
-            });
-        }
+
+        let nuevoUsuario = {
+          usuario: usuario,
+          email: email,
+          contrasena: bcryptjs.hashSync(contrasena, 10),
+          fecha_nacimiento: fecha_nacimiento,
+          createdAt: new Date()
+        };
+        db.Usuario.create(nuevoUsuario)
+          .then(function () {
+            return res.redirect("/users/login");
+          })
+          .catch(function (error) {
+            console.log(error);
+            return res.send(error);
+          });
+      }
       );
   },
 
   showLogin: function (req, res) {
     return res.render("login");
   },
- createLogin: function (req, res) {
+  createLogin: function (req, res) {
     let userInfo = {
       id: req.body.id,
       email: req.body.email,
@@ -106,7 +106,7 @@ create: function (req, res) {
           email: user.email,
           usuario: user.usuario
         };
-   if (userInfo.recordarme != undefined) {
+        if (userInfo.recordarme != undefined) {
           res.cookie("user", user, { maxAge: 150000 });
         }
 
@@ -124,27 +124,53 @@ create: function (req, res) {
     return res.redirect("/");
   },
 
-  profile: function(req, res) {
+  profile: function (req, res) {
     if (!req.session.user || !req.session.user.id) {  // verificamos que el usuario este en session 
       return res.redirect('/users/login');
     }
- // busco al usuario en session por su id 
+    // busco al usuario en session por su id 
     db.Usuario.findByPk(req.session.user.id)
-      .then(function(user) {
+      .then(function (user) {
         if (!user) {
           return res.redirect('/users/login');
         }
         // busco los productos
         return db.Producto.findAll()
-          .then(function(productos) { 
+          .then(function (productos) {
             res.render('perfil', { user, productos });
           });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         res.send("error al mostrar el perfil");
+      });
+  },
+
+  perfilPorId: function (req, res) {
+    let id = req.params.id;
+
+    db.Usuario.findByPk(id)
+      .then(function (usuario) {
+        if (!usuario) return res.redirect('/');
+
+        db.Producto.findAll({
+          where: { id_usuario: usuario.id }
+        })
+          .then(function (productos) {
+            res.render('perfil', {
+              user: usuario,
+              productos: productos,
+              totalProductos: productos.length
+            });
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.send("Error al mostrar el perfil del usuario");
       });
   }
 }
 
-module.exports = userController;
+
+
+module.exports = userController;
