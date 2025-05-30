@@ -62,7 +62,7 @@
 
             <% if (session.user) { %>
               <form class="form" action="/products/comentarios/<%= producto.id %>" method="POST">
-                <input class="form-input" type="text" name="texto" placeholder="Agregar comentario" required>
+              <input class="form-input" type="text" name="texto" placeholder="Agregar comentario" required>
                 <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
               </form>
               <% } else { %>

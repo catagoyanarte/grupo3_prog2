@@ -8,7 +8,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER,
         },
         texto: {
-            type: dataTypes.STRING
+            type: dataTypes.TEXT
         },
         createdAt: {
             type: dataTypes.DATE
@@ -29,7 +29,7 @@ module.exports = function (sequelize, dataTypes) {
 
     let config = {
         tableName: "comentarios",
-        timestamps: false,
+        timestamps: true,
         underscored: false,
     };
 

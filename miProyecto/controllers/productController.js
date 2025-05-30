@@ -96,6 +96,28 @@ let productoController = {
 
 
   },
+  agregarComentario: function (req,res) {
+      let usuario = req.session.user;
+        if (!usuario){
+            return res.redirect("/users/login");
+        }
+        let newComentario ={
+            id_usuario: usuario.id_usuario,
+            id_producto: req.params.id,
+            texto: req.body.texto,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
+
+        db.Comentario.create(newComentario)
+        .then(function(){
+            return res.redirect("/products/" + req.params.id);
+        })
+        .catch(function (error) {
+            return res.send(error);
+        })
+},
+
   search: function (req, res) {
     let query = req.query.search;
     error = {}
