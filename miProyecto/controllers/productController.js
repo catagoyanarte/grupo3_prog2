@@ -47,15 +47,15 @@ let productoController = {
   },
 
   mostrar: function (req, res) {
-  
-    
+
+     if (!req.session.user || !req.session.user.id) {
+    return res.redirect("/users/login");
+  }
+
     let nombre = req.body.nombre;
     let foto_producto = req.body.foto_producto;
     let descripcion = req.body.descripcion;
-    let createdAt = req.body.createdAt;
-    let updatedAt = req.body.updatedAt;
-    let deletedAt = req.body.deletedAt;
-  
+
     let error = {};
 
 
@@ -82,7 +82,7 @@ let productoController = {
       nombre: nombre,
       foto_producto: foto_producto,
       descripcion: descripcion,
-
+      id_usuario: req.session.user.id,
       createdAt: new Date()
     };
     db.Producto.create(nuevoProducto)
@@ -102,7 +102,7 @@ let productoController = {
 
 
     if (query == "") {
-      return res.render("resultados", { error, resultados: [] });
+      return res.render("resultados", { error, resultados: [], usuario: req.session.usuario});
 
     }
 
