@@ -145,10 +145,6 @@ const userController = {
         res.send("error al mostrar el perfil");
       });
   },
-
-<<<<<<< HEAD
-  
-=======
   perfilPorId: function (req, res) {
     let id = req.params.id;
 
@@ -172,9 +168,7 @@ const userController = {
         res.send("Error al mostrar el perfil del usuario");
       });
   }
->>>>>>> 2df557d8360bde51736c13bb8d86cbb67bd7eb32
+  
 }
-
-
 
 module.exports = userController;
