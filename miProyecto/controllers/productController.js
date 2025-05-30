@@ -98,12 +98,12 @@ let productoController = {
 
   },
   agregarComentario: function (req,res) {
-      let usuario = req.session.user;
+    const usuario = req.session.user;
         if (!usuario){
             return res.redirect("/users/login");
         }
         let newComentario ={
-            id_usuario: usuario.id_usuario,
+            id_usuario: usuario.id,
             id_producto: req.params.id,
             texto: req.body.texto,
             createdAt: new Date(),
