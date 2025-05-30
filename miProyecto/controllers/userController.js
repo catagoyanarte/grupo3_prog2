@@ -135,9 +135,11 @@ const userController = {
           return res.redirect('/users/login');
         }
         // busco los productos
-        return db.Producto.findAll()
+        db.Producto.findAll()
           .then(function (productos) {
-            res.render('perfil', { user, productos });
+           // letproductosId = productos 
+            let totalProductos = productos.length;
+            res.render('perfil', { user, productos, totalProductos });
           });
       })
       .catch(function (error) {
@@ -145,6 +147,7 @@ const userController = {
         res.send("error al mostrar el perfil");
       });
   },
+
   perfilPorId: function (req, res) {
     let id = req.params.id;
 
@@ -168,8 +171,6 @@ const userController = {
         res.send("Error al mostrar el perfil del usuario");
       });
   },
-
-  
 }
 
 module.exports = userController;

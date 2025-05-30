@@ -129,7 +129,6 @@ let productoController = {
 
     }
 
-
     db.Producto.findAll({
       where: {
         nombre: {
