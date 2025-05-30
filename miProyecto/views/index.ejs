@@ -50,6 +50,7 @@
                   <p>
                     <%= productos[i].descripcion %>
                   </p>
+                  <a href="/users/profile/<%= productos[i].usuario.id  %>"> Cargado por: <%= productos[i].usuario.email %></a>
                 </article>
               </a>
             </section>

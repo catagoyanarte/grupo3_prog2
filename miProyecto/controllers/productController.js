@@ -29,7 +29,8 @@ let productoController = {
           return res.render("producto", {
             producto,
             comentarios,
-            session: req.session
+            session: req.session,
+            user: req.session.user
           });
         });
       })
