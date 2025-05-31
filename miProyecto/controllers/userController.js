@@ -8,7 +8,7 @@ const userController = {
   show: function (req, res) {
 
     if (req.session.user != undefined) {
-      return res.redirect('/register')
+      return res.redirect('/users/register')
     } else {
       return res.render("register", { error: {} });
     }

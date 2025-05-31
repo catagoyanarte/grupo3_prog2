@@ -605,8 +605,7 @@ textarea.form-input {
   border-radius: 10px;
   width: 600px;
   max-width: 600px;
-  height: 76vh;
-
+  margin: auto;
 
 }
 

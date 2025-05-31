@@ -43,42 +43,41 @@
 
                             <% } %>
 
-                            <div class="container products-wrapper">
-                                <div class="row">
-                                    <% for(let i=0; i < resultados.length; i++) { %>
-                                        <div class="col-12 col-sm-6 col-lg-3">
-                                            <section class="product-box">
-                                                <a href="/products/<%= resultados[i].id_producto %>">
-                                                    <figure class="product-box_image">
-                                                        <img src="<%= resultados[i].foto_producto %>"
-                                                            alt="<%= resultados[i].nombre %>">
-                                                    </figure>
-                                                    <article class="product-box_data">
-                                                        <h2>
-                                                            <%= resultados[i].nombre %>
-                                                        </h2>
+                                <div class="container products-wrapper">
+                                    <div class="row">
+                                        <% for(let i=0; i < resultados.length; i++) { %>
+                                            <div class="col-12 col-sm-6 col-lg-3">
+                                                <section class="product-box">
+                                                    <a href="/products/<%= resultados[i].id_producto %>">
+                                                        <figure class="product-box_image">
+                                                            <img src="<%= resultados[i].foto_producto %>"
+                                                                alt="<%= resultados[i].nombre %>">
+                                                        </figure>
+                                                        <article class="product-box_data">
+                                                            <h2>
+                                                                <%= resultados[i].nombre %>
+                                                            </h2>
+                                                            <p>
+                                                                <%= resultados[i].descripcion %>
+                                                            </p>
+
+
+                                                        </article>
+
+                                                    </a>
+                                                    <% if (resultados[i].usuario) { %>
                                                         <p>
-                                                            <%= resultados[i].descripcion %>
+                                                            Subido por:
+                                                            <a href="/users/profile/<%= resultados[i].usuario.id %>">
+                                                                <%= resultados[i].usuario.usuario %>
+                                                            </a>
                                                         </p>
-
-
-                                                    </article>
-
-                                                </a>
-                                                <% if (resultados[i].usuario) { %>
-                                                    <p>
-                                                        Subido por:
-                                                        <a
-                                                            href="/users/profile/<%= resultados[i].usuario.id %>">
-                                                            <%= resultados[i].usuario.usuario %>
-                                                        </a>
-                                                    </p>
-                                                    <% } %>
-                                            </section>
-                                        </div>
-                                        <% } %>
+                                                        <% } %>
+                                                </section>
+                                            </div>
+                                            <% } %>
+                                    </div>
                                 </div>
-                            </div>
 
 
                                 <%- include('partials/footer') %>
