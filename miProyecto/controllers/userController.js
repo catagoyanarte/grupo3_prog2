@@ -107,7 +107,7 @@ const userController = {
           usuario: user.usuario
         };
         if (userInfo.recordarme != undefined) {
-          res.cookie("user", user, { maxAge: 150000 });
+          res.cookie("user", user, { maxAge: 150000 })
         }
 
         return res.redirect("/users/profile");
@@ -135,7 +135,11 @@ const userController = {
           return res.redirect('/users/login');
         }
         // busco los productos
-        db.Producto.findAll()
+        db.Producto.findAll({
+          where: {
+            id_usuario: req.session.user.id
+          }
+      })
           .then(function (productos) {
            // letproductosId = productos 
             let totalProductos = productos.length;
@@ -149,23 +153,25 @@ const userController = {
   },
 
   perfilPorId: function (req, res) {
-    let id = req.params.id;
 
-    db.Usuario.findByPk(id)
+    db.Usuario.findByPk(req.params.id, {
+      include: ["productos"] 
+    })
       .then(function (usuario) {
-        if (!usuario) return res.redirect('/');
+        if (!usuario) return res.send('este usuario no existe');
 
-        db.Producto.findAll({
-          where: { id_usuario: usuario.id }
-        })
-          .then(function (productos) {
+        //db.Producto.findAll({
+        //  where: { id_usuario: usuario.id }
+        //})
+        //  .then(function (productos) {
+        let totalProductos =  usuario.productos.length;
+
             res.render('perfil', {
               user: usuario,
-              productos: productos,
-              totalProductos: productos.length
+              productos: usuario.productos,
+              totalProductos: totalProductos
             });
-          });
-      })
+          })
       .catch(function (error) {
         console.log(error);
         res.send("Error al mostrar el perfil del usuario");
