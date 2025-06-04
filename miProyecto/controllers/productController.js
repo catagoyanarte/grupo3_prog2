@@ -1,4 +1,3 @@
-//const products = require('../db/products');
 let association = require('sequelize');
 const db = require('../database/models');
 const Producto = db.Producto;

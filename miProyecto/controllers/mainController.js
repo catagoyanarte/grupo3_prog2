@@ -1,13 +1,5 @@
-//const listaProductos = require('../db/products');
 const db = require('../database/models');
 const Producto = db.Producto;
-
-//const mainController = {
-//  index: function (req, res) {
-//      let productos= listaProductos.producto;
-//      res.render("index", {productos})
-//  }
-//};  -> este codigo corresponde a la primera entrega
 
 const mainController = {
   index: function(req, res) {

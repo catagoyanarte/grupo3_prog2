@@ -1,5 +1,3 @@
-//const users = require('../db/users');
-//const products = require('../db/products');
 const db = require('../database/models');
 const bcryptjs = require('bcryptjs');
 
@@ -141,7 +139,6 @@ const userController = {
           }
       })
           .then(function (productos) {
-           // letproductosId = productos 
             let totalProductos = productos.length;
             res.render('perfil', { user, productos, totalProductos });
           });
@@ -159,11 +156,6 @@ const userController = {
     })
       .then(function (usuario) {
         if (!usuario) return res.send('este usuario no existe');
-
-        //db.Producto.findAll({
-        //  where: { id_usuario: usuario.id }
-        //})
-        //  .then(function (productos) {
         let totalProductos =  usuario.productos.length;
 
             res.render('perfil', {
